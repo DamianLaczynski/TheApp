@@ -8,6 +8,7 @@ import { ProductComponent } from './product/product.component';
 import { LandingComponent } from './product/landing/landing.component';
 import { DocsComponent } from './product/docs/docs.component';
 import { FeaturesComponent } from './product/features/features.component';
+import { NotFoundComponent } from './user-application/not-found/not-found.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/app/auth/login', pathMatch: 'full' },
@@ -25,17 +26,17 @@ export const routes: Routes = [
         ],
       },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'audience', component: DashboardComponent },
-      { path: 'material', component: DashboardComponent },
-      { path: 'material/:id', component: DashboardComponent },
-      { path: 'schedule', component: DashboardComponent },
-      { path: 'task', component: DashboardComponent },
-      { path: 'task/:id', component: DashboardComponent },
-      { path: 'settings', component: DashboardComponent },
-      { path: 'info', component: DashboardComponent },
-      { path: 'profile', component: DashboardComponent },
-      { path: 'chats', component: DashboardComponent },
-      { path: 'notifications', component: DashboardComponent },
+      { path: 'audience', component: NotFoundComponent },
+      { path: 'materials', component: NotFoundComponent },
+      { path: 'materials/:id', component: NotFoundComponent },
+      { path: 'schedule', component: NotFoundComponent },
+      { path: 'tasks', component: NotFoundComponent },
+      { path: 'tasks/:id', component: NotFoundComponent },
+      { path: 'settings', component: NotFoundComponent },
+      { path: 'info', component: NotFoundComponent },
+      { path: 'profile', component: NotFoundComponent },
+      { path: 'messages', component: NotFoundComponent },
+      { path: 'notifications', component: NotFoundComponent },
 
     ],
   },
