@@ -1,0 +1,13 @@
+<div class="flex flex-row items-center justify-end">
+    @for (item of items; track item) { 
+    <button [routerLink]="item.path" 
+        class="hover:border-black rounded-full px-2 border-2 border-white bg-white text-black text-base capitalize" [routerLinkActive]="['font-medium']" [routerLinkActiveOptions]="{exact: true}">
+        {{ item.resource }} 
+    </button>
+    @if(!$last)
+    {
+        <p class="rounded p-2 bg-white text-black text-base font-normal">/</p>
+    }
+    
+    } 
+</div>
