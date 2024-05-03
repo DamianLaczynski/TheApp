@@ -1,0 +1,18 @@
+<div class="flex flex-row justify-between items-center">
+  <div class="flex flex-row items-center gap-x-2">
+    @if(resource.isFavourite) {
+    <i class="text-yellow-400 bi bi-star-fill hover:cursor-pointer" (click)="unfavourite(resource.id)"></i>
+    } @else {
+    <i class="bi bi-star"></i>
+    }
+    <a [href]="[
+        resource.type !== res.PATH
+          ? '/app/' + resource.type.toLowerCase() + '/' + resource.id
+          : '/app/' + resource.name.toLowerCase()
+      ]" class="font-normal underline-offset-4 capitalize">{{ resource.name }}</a>
+  </div>
+  <div
+    class="border-2 rounded-full border-white bg-gray-800 border-solid text-gray-300 px-2 text-sm font-medium tracking-wider text-center capitalize">
+    {{ resource.type.toLowerCase() }}
+  </div>
+</div>
