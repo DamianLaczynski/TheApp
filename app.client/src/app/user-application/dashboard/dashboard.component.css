@@ -1,0 +1,16 @@
+.app-input {
+    color: var(--foreground);
+    background: none;
+
+    border: 1px solid var(--outline);
+
+    text-align: start;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+.card {
+    -webkit-box-shadow: 4px 4px 20px -8px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 4px 4px 20px -8px rgba(66, 68, 90, 1);
+    box-shadow: 4px 4px 20px -8px rgba(66, 68, 90, 1);
+  }
