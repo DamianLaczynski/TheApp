@@ -5,8 +5,7 @@
     },
     "postgresql1": {
       "type": "postgresql",
-      "connectionId": "ConnectionStrings:AppApiDatabase",
-      "dynamicId": null
+      "connectionId": "ConnectionStrings:AppApiDatabase"
     }
   }
 }

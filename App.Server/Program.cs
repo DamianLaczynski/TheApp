@@ -1,4 +1,5 @@
 using App.Server;
+using App.Server.Service;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -20,10 +21,9 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 
 //Services
-
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 //Authentication and Authorization
-builder.Services.AddAuthentication();
 builder.Services.AddAuthorizationBuilder();
 builder.Services.AddIdentityApiEndpoints<User>()
     .AddEntityFrameworkStores<AppDbContext>()
