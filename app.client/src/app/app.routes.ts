@@ -9,6 +9,12 @@ import { LandingComponent } from './product/landing/landing.component';
 import { DocsComponent } from './product/docs/docs.component';
 import { FeaturesComponent } from './product/features/features.component';
 import { NotFoundComponent } from './user-application/not-found/not-found.component';
+import { ChatsListComponent } from './user-application/messages/chats-list/chats-list.component';
+import { ChatComponent } from './user-application/messages/ui/chat/chat.component';
+import { PeerCallComponent } from './user-application/peer-call/peer-call.component';
+import { KanbanBoardComponent } from './user-application/tasks/ui/kanban-board/kanban-board.component';
+import { ProfileComponent } from './user-application/user/profile/profile.component';
+import { ProfileSettingsComponent } from './user-application/user/ui/profile-settings/profile-settings.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/app/auth/login', pathMatch: 'full' },
@@ -30,14 +36,21 @@ export const routes: Routes = [
       { path: 'materials', component: NotFoundComponent },
       { path: 'materials/:id', component: NotFoundComponent },
       { path: 'schedule', component: NotFoundComponent },
-      { path: 'tasks', component: NotFoundComponent },
-      { path: 'tasks/:id', component: NotFoundComponent },
+      { path: 'tasks', component: KanbanBoardComponent },
+      { path: 'tasks/:taskId', component: KanbanBoardComponent },
       { path: 'settings', component: NotFoundComponent },
       { path: 'info', component: NotFoundComponent },
-      { path: 'profile', component: NotFoundComponent },
-      { path: 'messages', component: NotFoundComponent },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        children: [
+          { path: '', redirectTo: 'settings', pathMatch: 'full' },
+          { path: 'settings', component: ProfileSettingsComponent },
+        ],
+      },
+      { path: 'messages', component: PeerCallComponent },
+      { path: 'messages/:chatId', component: ChatComponent },
       { path: 'notifications', component: NotFoundComponent },
-
     ],
   },
   {

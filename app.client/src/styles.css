@@ -11,7 +11,7 @@
   cursor: default;
 }
 
-a:hover, button:hover, i:hover {
+a:hover, button:hover {
   cursor: pointer;
 }
 
@@ -33,10 +33,13 @@ body {
 
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
+  border-radius: 10px;
   width: 4px;
+  height: 4px;
   background: #dbdbdb; 
 }
  
@@ -49,3 +52,18 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #696969; 
 }
+
+.faceInCenter
+  {
+    animation: myAnim 1s ease 0s 1 normal forwards;
+
+  }
+  @keyframes myAnim {
+    0% {
+      opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }

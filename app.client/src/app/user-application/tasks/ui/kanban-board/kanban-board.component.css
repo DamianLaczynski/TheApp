@@ -1,0 +1,14 @@
+.faceIn
+  {
+    animation: myAnim 1s ease 2s 1 normal forwards;
+
+  }
+  @keyframes myAnim {
+    0% {
+      opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }

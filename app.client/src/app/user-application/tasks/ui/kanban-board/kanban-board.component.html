@@ -1,0 +1,47 @@
+
+
+@if(listState$ | async; as listState)
+{
+
+    @switch (listState.state) {
+        @case (listStateValue.LOADING) {
+            <div class="fadeIn flex justify-center items-center h-full">
+                <div class="flex flex-row gap-2">
+                    <div class="w-4 h-4 rounded-full bg-gray-700 animate-bounce [animation-delay:.7s]"></div>
+                    <div class="w-4 h-4 rounded-full bg-gray-600 animate-bounce [animation-delay:.3s]"></div>
+                    <div class="w-4 h-4 rounded-full bg-gray-700 animate-bounce [animation-delay:.7s]"></div>
+                  </div>
+            </div>
+        }
+        @case (listStateValue.SUCCESS) {
+            @if(listState.results)
+            {
+                
+                <div class="flex flex-row h-full">
+                    
+                <div class="flex flex-row justify-start h-full w-full bg-gray-50 gap-x-4 p-4 overflow-y-auto">
+                    
+                    <app-kanban-column [taskStatus]="TaskStatus.NEW" [tasks]="listState.results | filter: TaskStatus.NEW" (createTask)="createTask($event)"></app-kanban-column>
+                    <app-kanban-column [taskStatus]="TaskStatus.IN_PROGRESS" [tasks]="listState.results | filter: TaskStatus.IN_PROGRESS" (createTask)="createTask($event)"></app-kanban-column>
+                    <app-kanban-column [taskStatus]="TaskStatus.DONE" [tasks]="listState.results | filter: TaskStatus.DONE" (createTask)="createTask($event)"></app-kanban-column>
+                </div>
+                @if(taskId)
+                {
+                    <app-task-details-card [task]="listState.results | find: taskId" (update)="updateTask($event)" (delate)="delateTask($event)"></app-task-details-card>
+                }
+
+                
+            </div>
+            }
+        }
+        @case (listStateValue.ERROR) {
+            <div class="flex justify-center items-center h-full">
+                <p class="font-light text-4xl">Something went wrong ...</p>
+            </div>
+        }
+        @default {
+
+        }
+
+    }
+}
