@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, inject } from '@angular/core';
 import {
   NavigationStart,
   Router,
@@ -18,6 +18,7 @@ import { AuthService } from '../../auth/service/auth.service';
 export class SidebarDashboardComponent implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
+  private elementRef = inject(ElementRef);
   isExpanded: boolean = false;
 
   ngOnInit(): void {
@@ -28,6 +29,23 @@ export class SidebarDashboardComponent implements OnInit {
           this.toggle();
         }
       });
+  }
+  
+  private wasInside = false;
+  
+  @HostListener('click')
+  clickInside() {
+    this.wasInside = true;
+
+  }
+  
+  @HostListener('document:click')
+  clickout() {
+    if (this.isExpanded && !this.wasInside)
+      {
+        this.isExpanded = false;
+      }
+      this.wasInside = false;
   }
 
   logOut() {

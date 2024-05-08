@@ -1,0 +1,9 @@
+<div class="flex flex-row justify-between items-center px-4 py-3 w-full bg-none">
+    <div class="flex flex-row items-center gap-x-2">
+        <a [routerLink]="['/app/notifications']" class="font-semibold text-lg">Notifications</a>
+    </div>
+    <button id="markAllAsRead" class="flex flex-row items-center justify-center gap-x-2 font-medium hover:cursor-pointer px-1 rounded hover:bg-gray-200" (click)="markAllAsRead.emit()" >
+        <p class="text-base hover:cursor-pointer" style="line-height: 28px;">Mark all as read</p>
+        <i class="w-4 h-4 text-center flex items-center bi bi-check-circle"></i>
+    </button>
+</div>

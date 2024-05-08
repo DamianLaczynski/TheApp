@@ -1,14 +1,28 @@
 <div class="navbar z-10 flex flex-row p-4 justify-between border-b-2 border-solid border-black">
     <div class="inline-flex items-center gap-x-1">
-        <button class="hover:bg-black hover:text-white rounded-full w-10 h-10 bg-white text-black"><i class="bi bi-star"></i></button>
+        <button class="hover:bg-black hover:text-white rounded-full w-10 h-10 bg-white text-black"><i
+                class="bi bi-star"></i></button>
         <app-path></app-path>
     </div>
     <div class="inline-flex items-center gap-x-2">
-        <input id="email" name="email" class="text-start rounded-full px-3 h-10 border-solid border-black border-2" style="font-size: 14px; line-height: 14px;" placeholder="Search" formControlName="email" required />
-        <button [routerLink]="['/app/chats']" [routerLinkActive]="['bg-black','text-white']" class="hover:bg-black hover:text-white w-10 h-10 rounded-full border-2 border-solid border-black "><i class="bi bi-chat-fill"></i></button>
-        <button [routerLink]="['/app/notifications']" [routerLinkActive]="['bg-black','text-white']" class="hover:bg-black hover:text-white w-10 h-10 rounded-full border-2 border-solid border-black "><i class="bi bi-bell-fill"></i></button>
+        <input id="email" name="email" class="text-start rounded-full px-3 h-10 border-solid border-black border-2"
+            style="font-size: 14px; line-height: 14px;" placeholder="Search" formControlName="email" required />
+        <button id="messages" class="z-10 hover:bg-black hover:text-white w-10 h-10 rounded-full border-2 border-solid border-black {{isMessagesFeedShowed ? 'bg-black text-white' : ''}}"
+            style="position: relative;" (click)="toggleMessagesFeed()">
+            <i class="-z-10 bi bi-chat-fill"></i>
+            @if (isMessagesFeedShowed) {
+            <app-messages-feed style="position: absolute; left: -300px; top: 60px;"></app-messages-feed>
+            }
+        </button>
+        <button id="notifications" class="hover:bg-black hover:text-white w-10 h-10 rounded-full border-2 border-solid border-black {{isNotificationsFeedShowed ? 'bg-black text-white' : ''}}"
+            style="position: relative;" (click)="toggleNotificationFeed()">
+            <i class="-z-10 bi bi-bell-fill"></i>
+            @if (isNotificationsFeedShowed) {
+            <app-notifications-feed style="position: absolute; left: -300px; top: 60px;"></app-notifications-feed>
+            }
+        </button>
         <button [routerLink]="['/app/profile']" class="w-10 h-10 sb-tooltip">
             <img class="rounded-full hover:opacity-90" src="../../../assets/profile.jpg" />
-          </button>
+        </button>
     </div>
 </div>
