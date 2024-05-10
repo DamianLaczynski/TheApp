@@ -1,4 +1,5 @@
 using App.Server;
+using App.Server.Chats;
 using App.Server.Service;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
@@ -22,6 +23,7 @@ builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsi
 
 //Services
 builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<IChatRoomService, ChatRoomService>();
 
 //Authentication and Authorization
 builder.Services.AddAuthorizationBuilder();

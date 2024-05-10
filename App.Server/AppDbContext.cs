@@ -1,4 +1,5 @@
-﻿using App.Server.Model;
+﻿using App.Server.Chats.Model;
+using App.Server.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -17,6 +18,9 @@ public class AppDbContext : IdentityDbContext<User>
     }
 
     public DbSet<App.Server.Model.Task> Tasks { get; set; }
+    public DbSet<ChatRoom> ChatRooms { get; set; }
+    public DbSet<Message> Messages { get; set; }
+    public DbSet<UserChatRoom> UserChatRooms { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -38,6 +42,41 @@ public class AppDbContext : IdentityDbContext<User>
             .Property(t => t.UpdatedAt)
               .HasDefaultValueSql("NOW()")
               .ValueGeneratedOnAddOrUpdate();
+
+        modelBuilder.Entity<Message>(eb =>
+        {
+            eb.HasOne(m => m.Sender)
+                .WithMany()
+                .HasForeignKey(m => m.SenderId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            eb.Property(m => m.Id)
+            .ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<ChatRoom>(eb =>
+        {
+            eb.HasMany(c => c.Messages)
+                .WithOne(m => m.ChatRoom)
+                .HasForeignKey(m => m.ChatRoomId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            eb.Property(m => m.Id)
+            .ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<UserChatRoom>(eb =>
+        {
+            eb.HasKey(ucr => new { ucr.UserId, ucr.ChatRoomId });
+
+            eb.HasOne(ucr => ucr.User)
+                .WithMany(u => u.UserChatRooms)
+                .HasForeignKey(ucr => ucr.UserId);
+
+            eb.HasOne(ucr => ucr.ChatRoom)
+                .WithMany(c => c.UserChatRooms)
+                .HasForeignKey(ucr => ucr.ChatRoomId);
+        });
 
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace App.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240508222226_add-chat-entities")]
+    partial class addchatentities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,7 +27,6 @@ namespace App.Server.Migrations
             modelBuilder.Entity("App.Server.Chats.Model.ChatRoom", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -39,7 +41,6 @@ namespace App.Server.Migrations
             modelBuilder.Entity("App.Server.Chats.Model.Message", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("text");
 
                     b.Property<string>("ChatRoomId")
@@ -66,7 +67,7 @@ namespace App.Server.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("App.Server.Chats.Model.UserChatRoom", b =>
@@ -87,7 +88,7 @@ namespace App.Server.Migrations
 
                     b.HasIndex("ChatRoomId");
 
-                    b.ToTable("UserChatRooms");
+                    b.ToTable("UserChatRoom");
                 });
 
             modelBuilder.Entity("App.Server.Model.Task", b =>

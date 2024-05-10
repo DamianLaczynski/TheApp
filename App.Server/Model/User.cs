@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using App.Server.Chats.Model;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -20,5 +21,7 @@ namespace StudyBookAPI.Entities
 
         [PersonalData]
         public bool IsDeleted { get; set; } = false;
+
+        public List<UserChatRoom> UserChatRooms  { get; set; } = new List<UserChatRoom>();
     }
 }
