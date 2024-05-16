@@ -1,0 +1,24 @@
+
+@if(state$ | async; as state)
+{
+    @switch (state.state) {
+        
+        @case ("SUCCESS") {
+            <div class="flex flex-row justify-between h-full">
+            <div class="flex flex-col h-full bg-gray-50 w-full">
+                <app-planner-header [currentDate]="currentSelectedDay" (newDateSelected)="getSchedule($event)" (showTaskExpoler)="toggleTaskExpoler()"></app-planner-header>
+                <app-planner-body [dayPlanner]="state.results" [currentDate]="currentSelectedDay"></app-planner-body>
+            </div>
+            @if(isTaskExplorerShowed)
+            {
+                <app-task-explorer (close)="toggleTaskExpoler()"></app-task-explorer>
+            }
+            
+        </div>
+        }
+        @case ("ERROR") {
+            <div class="">Something went wrong...</div>
+        }
+    }
+    
+}

@@ -1,0 +1,33 @@
+<div class="flex flex-col bg-white h-full p-5 gap-5 max-w-96 anim overflow-y-auto invisible lg:visible">
+    <div class="flex flex-row justify-end">
+        <button class="hover:bg-gray-200 px-1 rounded bi bi-x-lg" (click)="close.emit()"></button>
+    </div>
+    <!--Header-->
+    <app-side-card-header title="From Tasks" description="Drag and drop your task to planner to cout how many time you spend for it"></app-side-card-header>
+    <!--Body-->
+    <div class="flex flex-col gap-2">
+        
+        @if(taskState$ | async; as state)
+        {
+            @switch (state.state) {
+                @case ("SUCCESS") {
+                    <div class="w-full pb-1">
+                        <div class="font-medium">🏗 In Progress</div>
+                        <div style="border: 1px solid;"></div>
+                    </div>
+                    @for (task of state.results | filter: TaskStatus.IN_PROGRESS; track $index) {
+                        <app-task-dragable-card [task]="task"></app-task-dragable-card>
+                    }
+                    <div class="w-full pt-2 pb-1">
+                        <div class="font-medium">🆕 New</div>
+                        <div style="border: 1px solid;"></div>
+                    </div>
+                    @for (task of state.results | filter: TaskStatus.NEW; track $index) {
+                        <app-task-dragable-card [task]="task"></app-task-dragable-card>
+                    }
+                }
+            }
+        }
+    </div>
+</div>
+

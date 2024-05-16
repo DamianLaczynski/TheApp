@@ -12,6 +12,8 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 export class PlannerHeaderComponent implements OnInit, OnChanges {
   @Input({required: true}) currentDate!: Date;
   @Output() newDateSelected = new EventEmitter<Date>();
+  @Output() showTaskExpoler = new EventEmitter();
+  
 
   todayDate = new Date(Date.now());
 

@@ -22,6 +22,7 @@ builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsi
 
 //Services
 builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<IPlannerEventService, PlannerEventService>();
 
 //Authentication and Authorization
 builder.Services.AddAuthorizationBuilder();
@@ -65,7 +66,7 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "App API", Version = "v1" });
 
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    //options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
