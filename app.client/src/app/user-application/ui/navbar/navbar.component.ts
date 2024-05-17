@@ -1,17 +1,14 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
   HostListener,
   OnInit,
-  Output,
   inject,
 } from '@angular/core';
 import { PathComponent } from './ui/path/path.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { NotificationsFeedComponent } from '../../notifications/ui/notifications-feed/notifications-feed.component';
 import { MessagesFeedComponent } from '../../messages/ui/message-feed/message-feed.component';
-import { FeedHeaderComponent } from '../../notifications/ui/feed-header/feed-header.component';
+import { NotificationsFeedComponent } from '../../notifications/ui/notifications-feed/notifications-feed.component';
 
 @Component({
   selector: 'app-navbar',
@@ -20,9 +17,8 @@ import { FeedHeaderComponent } from '../../notifications/ui/feed-header/feed-hea
     PathComponent,
     RouterLink,
     RouterLinkActive,
-    FeedHeaderComponent,
     NotificationsFeedComponent,
-    MessagesFeedComponent,
+    MessagesFeedComponent
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',

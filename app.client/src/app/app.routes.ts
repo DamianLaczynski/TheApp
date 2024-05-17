@@ -14,6 +14,7 @@ import { KanbanBoardComponent } from './user-application/tasks/ui/kanban-board/k
 import { ProfileComponent } from './user-application/user/profile/profile.component';
 import { ProfileSettingsComponent } from './user-application/user/ui/profile-settings/profile-settings.component';
 import { ScheduleComponent } from './user-application/schedule/schedule.component';
+import { ContactsComponent } from './user-application/contacts/contacts.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/app/auth/login', pathMatch: 'full' },
@@ -31,7 +32,7 @@ export const routes: Routes = [
         ],
       },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'audience', component: NotFoundComponent },
+      { path: 'contacts', component: ContactsComponent },
       { path: 'materials', component: NotFoundComponent },
       { path: 'materials/:id', component: NotFoundComponent },
       { path: 'schedule', component: ScheduleComponent },
