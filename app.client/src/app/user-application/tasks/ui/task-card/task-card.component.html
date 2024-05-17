@@ -13,22 +13,7 @@
     <div class="flex flex-row {{task.priority ? 'justify-between':'justify-end'}} items-center gap-x-2 w-full">
         @if(task.priority)
         {
-            @switch (task.priority) {
-                @case (TaskPriority.HIGH) {
-                    <div class="font-normal text-xs rounded-xl px-3 py-1 text-red-600  bg-red-100">High</div>
-                }
-                @case ("Medium") {
-                    <div class="font-normal text-xs rounded-xl px-3 py-1 text-yellow-500  bg-yellow-50">Medium</div>
-    
-                }
-                @case ("Low") {
-                    <div class="font-normal text-xs rounded-xl px-3 py-1 text-green-600  bg-green-100">Low</div>
-    
-                }
-                @default {
-                    
-                }
-            }
+            <app-tag [priority]="task.priority"></app-tag>
         }
         
         @if(task.deadline)

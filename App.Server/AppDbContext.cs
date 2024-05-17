@@ -17,6 +17,7 @@ public class AppDbContext : IdentityDbContext<User>
     }
 
     public DbSet<App.Server.Model.Task> Tasks { get; set; }
+    public DbSet<PlannerEvent> PlannerEvents { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -38,6 +39,15 @@ public class AppDbContext : IdentityDbContext<User>
             .Property(t => t.UpdatedAt)
               .HasDefaultValueSql("NOW()")
               .ValueGeneratedOnAddOrUpdate();
+
+        modelBuilder.Entity<PlannerEvent>(eb =>
+        {
+            eb.Property(t => t.Id).ValueGeneratedOnAdd();
+            eb.Property(p => p.CreatedAt)
+            .HasDefaultValueSql("NOW()")
+            .ValueGeneratedOnAdd();
+            
+        });
 
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

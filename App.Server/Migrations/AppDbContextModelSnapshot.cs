@@ -21,6 +21,47 @@ namespace App.Server.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("App.Server.Model.PlannerEvent", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<int?>("Duration")
+                        .HasColumnType("integer");
+
+                    b.Property<TimeOnly?>("End")
+                        .HasColumnType("time without time zone");
+
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<short>("PlaceNumber")
+                        .HasColumnType("smallint");
+
+                    b.Property<TimeOnly?>("Start")
+                        .HasColumnType("time without time zone");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PlannerEvents");
+                });
+
             modelBuilder.Entity("App.Server.Model.Task", b =>
                 {
                     b.Property<string>("Id")
@@ -39,6 +80,7 @@ namespace App.Server.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Priority")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Status")

@@ -1,0 +1,27 @@
+<div class="anim flex flex-col items-center justify-center gap-2 rounded-lg bg-gray-50 w-48 px-4 py-2 border-2">
+    <p class="font-medium">Time Setter</p>
+    <div class="w-full h-min rounded-full" style="border-width: 1px;"></div>
+    <p class="font-normal">Range</p>
+    <div class="flex flex-row gap-2 items-end justify-end w-full">
+        <p>From</p>
+        <input class="rounded" type="time" [(ngModel)]="model.start" (change)="changeStart()"/>
+    </div>
+    <div class="flex flex-row gap-2 items-end justify-end w-full">
+        <p>To</p>
+        <input class="rounded" type="time" [(ngModel)]="model.end" (change)="changeEnd()"/>
+    </div>
+    <div class="flex flex-row items-center gap-2 w-full">
+        <div class="w-full rounded-full" style="border-width: 1px;"></div>
+        <div class="text-gray-500">or</div>
+        <div class="w-full h-min rounded-full" style="border-width: 1px;"></div>
+    </div>
+    <p class="font-normal">Duration</p>
+    <div class="flex flex-row items-center justify-end gap-2">
+        <input class="w-auto" type="number" min="15" max="1000" step="5" [(ngModel)]="model.duration" (change)="changeDuration()"/>
+        min
+    </div>
+    
+    <button class="px-2 py-1 border-2 rounded font-medium hover:bg-gray-200" (click)="clearForm()" >Clear</button>
+    <button class=""></button>
+</div>
+

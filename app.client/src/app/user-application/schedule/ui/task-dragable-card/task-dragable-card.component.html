@@ -1,0 +1,10 @@
+<div class="flex flex-row border-2 rounded p-2 justify-between items-center gap-2 w-full" draggable="true">
+    <div class="flex flex-row justify-center items-center gap-1">
+        <i class="rounded bi bi-three-dots-vertical"></i>
+        <div class="font-medium text-ellipsis text-nowrap overflow-hidden max-w-60">{{task.title}}</div>
+    </div>
+    @if(task.priority)
+    {
+        <app-tag [priority]="task.priority"></app-tag>
+    }
+</div>

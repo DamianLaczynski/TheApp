@@ -13,6 +13,7 @@ import { ChatComponent } from './user-application/messages/ui/chat/chat.componen
 import { KanbanBoardComponent } from './user-application/tasks/ui/kanban-board/kanban-board.component';
 import { ProfileComponent } from './user-application/user/profile/profile.component';
 import { ProfileSettingsComponent } from './user-application/user/ui/profile-settings/profile-settings.component';
+import { ScheduleComponent } from './user-application/schedule/schedule.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/app/auth/login', pathMatch: 'full' },
@@ -33,7 +34,7 @@ export const routes: Routes = [
       { path: 'audience', component: NotFoundComponent },
       { path: 'materials', component: NotFoundComponent },
       { path: 'materials/:id', component: NotFoundComponent },
-      { path: 'schedule', component: NotFoundComponent },
+      { path: 'schedule', component: ScheduleComponent },
       { path: 'tasks', component: KanbanBoardComponent },
       { path: 'tasks/:taskId', component: KanbanBoardComponent },
       { path: 'settings', component: NotFoundComponent },
