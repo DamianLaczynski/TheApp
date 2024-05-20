@@ -4,7 +4,8 @@ const PROXY_CONFIG = [
       "/login",
       "/register",
       "/api/Task",
-      "/api/PlannerEvent"
+      "/api/PlannerEvent",
+      "/api/Contact"
     ],
     target: "https://localhost:7291",
     secure: false, 

@@ -1,0 +1,82 @@
+<!-- <div class="flex flex-row justify-between items-center gap-x-5">
+    <div class="font-light text-sm">Category</div>
+    <input class="px-2 rounded hover:bg-gray-200" placeholder="eg. 123 456 789" formControlName="phoneNumber"/>
+@if(state$ | async; as state)
+{
+    @switch (state.state) {
+        @case ("SUCCESS") {
+            <div class="flex flex-col">
+            <select>
+                @for (cat of state.results; track $index) {
+                    <option [value]="cat.id">{{cat.name}}</option>
+                }
+            </select>
+            @for (cat of state.results; track $index) {
+                <select>
+                    @for (sub of cat.subCategories; track sub.id) {
+                        <option [value]="sub.id">{{sub.name}}</option>
+                    }
+                </select>
+                
+            }
+        </div>
+        }
+    }
+}
+</div> -->
+
+
+    @if(state$ | async; as state)
+{
+    @switch (state.state) {
+        @case ("SUCCESS") {
+            @if(category)
+            {
+                @if(category.superCategory)
+                {
+                    <div class="flex flex-row justify-between items-center gap-x-5">
+                        <div class="font-light text-sm">Category</div>
+                        <select [value]="category.superCategory.id">
+                            @for (cat of state.results; track $index) {
+                                <option [value]="cat.id">{{cat.name}}</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="flex flex-row justify-between items-center gap-x-5">
+                        <div class="font-light text-sm">SubCategory</div>
+                            @if(state.results | find: category.superCategory.id; as sub)
+                            {
+                                <select [value]="category.id">
+                                    @for (cat of sub.subCategories; track $index) {
+                                        <option [value]="cat.id">{{cat.name}}</option>
+                                    }
+                                </select>
+                            }
+                        
+                        
+                    </div>
+                }
+                @else {
+                    <div class="flex flex-row justify-between items-center gap-x-5">
+                        <div class="font-light text-sm">Category</div>
+                        {{category.id}}
+                        <select [value]="category.id">
+                            @for (cat of state.results; track $index) {
+                                {{cat.id}}
+                                <option [value]="cat.id">{{cat.id}}</option>
+                            }
+                        </select>
+                    </div>
+                }
+            }
+            
+            
+            
+            
+    <!-- <select [value]="category.superCategory?.id">
+        <option ></option>
+    </select> -->
+
+    }
+}
+}

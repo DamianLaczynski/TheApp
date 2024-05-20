@@ -1,5 +1,7 @@
 ﻿using App.Exceptions;
+using App.Server.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace App.Server
 {
@@ -15,6 +17,7 @@ namespace App.Server
             (int statusCode, string message) = exception switch
             {
                 ForbiddenException => (403, ""),
+                NoContentException noContentException => (204, noContentException.Message),
                 BadRequestException badRequestException => (400, badRequestException.Message),
                 NotFoundException notFoundException => (404, notFoundException.Message),
                 KeyNotFoundException keyNotFoundException => (404, keyNotFoundException.Message),

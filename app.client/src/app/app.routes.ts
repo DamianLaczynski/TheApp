@@ -33,6 +33,7 @@ export const routes: Routes = [
       },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'contacts', component: ContactsComponent },
+      { path: 'contacts/:contactId', component: ContactsComponent },
       { path: 'materials', component: NotFoundComponent },
       { path: 'materials/:id', component: NotFoundComponent },
       { path: 'schedule', component: ScheduleComponent },

@@ -1,4 +1,5 @@
-﻿using App.Server.Model;
+﻿using App.Server.Contacts.Models;
+using App.Server.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -18,6 +19,8 @@ public class AppDbContext : IdentityDbContext<User>
 
     public DbSet<App.Server.Model.Task> Tasks { get; set; }
     public DbSet<PlannerEvent> PlannerEvents { get; set; }
+    public DbSet<Contact> Contacts { get; set; }
+    public DbSet<ContactCategory> ContactCategories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -49,9 +52,33 @@ public class AppDbContext : IdentityDbContext<User>
             
         });
 
+        modelBuilder.Entity<Contact>(eb =>
+        {
+            eb.Property(c => c.Id)
+                .ValueGeneratedOnAdd()
+                .IsRequired();
+
+            eb.HasIndex(c => c.Email).IsUnique();
+
+            eb.HasOne(c => c.Category).WithMany(c => c.Contacts).HasForeignKey(c => c.CategoryId).OnDelete(DeleteBehavior.NoAction);
+        });
+                
+
+        modelBuilder.Entity<ContactCategory>(eb =>
+        {
+            eb.Property(c => c.Id)
+            .ValueGeneratedOnAdd();
+
+            eb.HasOne(c => c.SuperCategory)
+            .WithMany(c => c.SubCategories)
+            .HasForeignKey(c => c.SuperCategoryId)
+            .OnDelete(DeleteBehavior.Restrict);
+        });
+            
+
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("Host=localhost;Database=postgres;Username=postgres;Password=postgres");
+        optionsBuilder.UseNpgsql("Host=localhost;Database=AppDb;Username=postgres;Password=postgres");
     }
 }
