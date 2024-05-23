@@ -32,15 +32,15 @@ export const routes: Routes = [
         ],
       },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'contacts', component: ContactsComponent },
-      { path: 'contacts/:contactId', component: ContactsComponent },
+      { path: 'contacts', redirectTo: "contacts/" },
+      { path: 'contacts/:contactId', component: ContactsComponent, title: "Contacts" },
       { path: 'materials', component: NotFoundComponent },
       { path: 'materials/:id', component: NotFoundComponent },
-      { path: 'schedule', component: ScheduleComponent },
-      { path: 'tasks', component: KanbanBoardComponent },
-      { path: 'tasks/:taskId', component: KanbanBoardComponent },
-      { path: 'settings', component: NotFoundComponent },
-      { path: 'info', component: NotFoundComponent },
+      { path: 'schedule', component: ScheduleComponent, title: "Schedule" },
+      { path: 'tasks', component: KanbanBoardComponent, title: "Tasks" },
+      { path: 'tasks/:taskId', component: KanbanBoardComponent, title: "Tasks" },
+      { path: 'settings', component: NotFoundComponent, title: "Settings" },
+      { path: 'info', component: NotFoundComponent, title: "Info" },
       {
         path: 'profile',
         component: ProfileComponent,
@@ -57,6 +57,7 @@ export const routes: Routes = [
   {
     path: 'product',
     component: ProductComponent,
+    title: "The App",
     children: [
       { path: '', redirectTo: 'landing', pathMatch: 'full' },
       {
