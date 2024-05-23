@@ -1,0 +1,33 @@
+<div class="flex flex-col m-5">
+    <div class="flex flex-col items-stretch gap-y-6 max-w-md">
+        <div class="flex flex-col gap-y-5 justify-center text-center py-16">
+            <div class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase">Welcome Guest</div>
+            <div class="text-xl">Welcome in <a [routerLink]="['/product/landing']"><span class="text-yellow-500 font-normal">The App</span></a></div>
+            <div class="text-lg font-semibold text-red-600 animate-bounce hover:cursor-pointer" [routerLink]="['/app/contacts']">See Public Contacts</div>
+        </div>
+        <!--<div class="social">
+            <button class="social-btn">
+                <i class="w-5 h-5 text-xl leading-5 bi bi-google"></i>
+                <p class="text text-base font-normal">Continue With Google</p>
+            </button>
+        </div>
+        <div class="flex justify-center items-center gap-x-4">
+            <div class="w-16 h-0" style="border: 1px solid #AFA8A8;"></div>
+            Or
+            <div class="w-16 h-0" style="border: 1px solid #AFA8A8;"></div>
+        </div>-->
+        <form [formGroup]="registerForm" class="flex flex-col gap-y-5">
+            <div class=" flex flex-col gap-y-5">
+                <!--<input class="app-input" placeholder="Name" />-->
+                <input id="email" name="email" class="app-input" placeholder="Email" formControlName="email" required />
+                <input id="password" name="password" class="app-input" placeholder="Password" formControlName="password" required />
+            </div>
+            <!--<div class="flex flex-row gap-x-1.5">
+                <input class="" type="checkbox" id="remember" name="remember">
+                <label class="text-base font-normal" for="remember">Remember Me</label>
+            </div>-->
+            <button class="app-btn font-medium" (click)="register()">Sign Up</button>
+        </form>
+        <div class="text-center font-light">Already have an account? <a class="text-yellow-400 font-medium" [routerLink]="['../login']">Log in</a></div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+@if(isEditMode)
+{
+<form [formGroup]="plannerForm" class="flex flex-row gap-1 border-b-2">
+    <div class="flex flex-row justify-center items-center min-h-14 px-1 gap-1 min-w-24 max-w-24 rounded mx-2 my-1 relative">
+        
+            @if(plannerForm.controls.duration.value)
+            {
+                <div class="">{{plannerForm.controls.duration.value}} min</div>
+            }
+            @else if (plannerForm.controls.start || plannerForm.controls.end) {
+                <div class="flex flex-col justify-center items-center gap-1">
+                    <div class="text-sm">{{plannerForm.controls.start.value  ? plannerForm.controls.start.value : "--:--"}}</div>
+                    <div class="text-sm">{{plannerForm.controls.end.value ? plannerForm.controls.end.value : "--:--"}}</div>
+                </div>
+            }
+            @else {
+                <div class="" >Set</div>
+
+            }
+            <app-time-set style="position: absolute; top: 60px; left: -10px" [plannerForm]="plannerForm" (newTimeForm)="updatePlannerForm($event)"></app-time-set>
+
+    </div>
+    
+    <div class="flex flex-row items-center p-2 justify-start gap-2 border-l-2">
+        <input type="checkbox" formControlName="isDone">
+        <input class="font-medium text-lg px-1 placeholder:font-extralight placeholder:text-sm"
+            placeholder="Type here ..." formControlName="name" />
+        <div class="flex flex-row gap-1">
+            <button class="hover:bg-gray-200 rounded px-1 font-bold border-2"(click)="saveChanges()" ><span><i
+                        class="bi bi-check-lg"></i></span></button>
+            <button class="hover:bg-gray-200 rounded px-1 font-bold border-2" (click)="toggleMode()"><span><i
+                        class="bi bi-x-lg"></i></span></button>
+        </div>
+    </div>
+</form>
+}
+@else {
+
+<div class="h-16 flex flex-row gap-1 border-b-2" (dblclick)="toggleMode()" draggable="true">
+    <div class="flex flex-row items-center p-2 gap-1 min-w-28 max-w-28">
+        <i class="rounded bi bi-three-dots-vertical"></i>
+        <div class="flex flex-row justify-center w-full">
+            @if(plannerEvent?.duration)
+            {
+                <div class="">{{plannerEvent?.duration}} min</div>
+            }
+            @else if (plannerEvent?.start || plannerEvent?.end) {
+                @if(plannerEvent)
+                {
+                    <div class="flex flex-col justify-center items-center gap-1">
+                        <div class="text-sm">{{plannerEvent.start ? plannerEvent.start : "--:--"}}</div>
+                        <div class="text-sm">{{plannerEvent.end ? plannerEvent.end : "--:--"}}</div>
+                    </div>
+                }
+            }
+            @else {}
+        </div>
+        
+
+    </div>
+    <div class="flex flex-row items-center p-2 justify-start gap-2 border-l-2">
+        @if(plannerEvent)
+        {
+        <input type="checkbox" #isDone [checked]="plannerEvent.isDone" disabled>
+        <div class="font-medium text-lg px-1 {{isDone.checked ? 'line-through': ''}} " >{{plannerEvent.name}}</div>
+
+        }
+        @else {
+        <input type="checkbox" disabled>
+        }
+
+    </div>
+</div>
+}

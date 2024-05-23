@@ -1,0 +1,17 @@
+
+    <app-toast></app-toast>
+    @if(authState.state == authStateValue.LOGGED_IN)
+    {
+        <app-sidebar-dashboard></app-sidebar-dashboard>
+        <app-navbar></app-navbar>
+        <div style="height: 100vh; width: 100vw; padding-left: 92px; padding-top: 70px;" class="bg-gray-50">
+
+                <router-outlet></router-outlet>
+        </div>
+    }
+    @else {
+        <div class="flex justify-center items-center" style="height: 100vh;">
+            <router-outlet></router-outlet>
+        </div>
+    }
+

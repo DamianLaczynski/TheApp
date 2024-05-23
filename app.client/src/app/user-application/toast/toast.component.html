@@ -1,0 +1,45 @@
+@if($toast | async; as toast)
+{
+    <div class="w-full absolute flex flex-row justify-center z-50 m-5">
+    @switch (toast.type) {
+        @case (ToastType.None) {
+
+        }
+        @case (ToastType.Success) {
+            <div class="toast rounded-full bg-green-50 text-green-700 flex flex-row gap-2 px-2 py-1">
+                <i class="bi bi-check-circle"></i>
+                @if(toast.message)
+                {
+                    <div class="font-medium">{{toast.message}}</div>
+                }
+            </div>
+        }
+        @case (ToastType.Error) {
+            <div class="rounded-full bg-red-50 text-red-700 flex flex-row gap-2 px-2 py-1">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                @if(toast.message)
+                {
+                    <div class="">{{toast.message}}</div>
+                }
+            </div>
+        }
+        @case (ToastType.Alert) {
+            <div class="rounded-full bg-yellow-50 text-yellow-600 flex flex-row gap-2 px-2 py-1">
+                <i class="bi bi-check-circle"></i>
+                @if(toast.message)
+                {
+                    <div class="">{{toast.message}}</div>
+                }
+            </div>
+        }
+        @default {
+            <div class="">Something went wrong</div>
+        }
+    }
+</div>
+}
+<div class="w-full">
+    <div class="">
+
+    </div>
+</div>

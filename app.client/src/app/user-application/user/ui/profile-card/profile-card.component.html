@@ -1,0 +1,45 @@
+<div class="bg-white rounded-lg flex flex-row p-7 gap-x-7">
+    <!--Image-->
+    <img class="w-40 h-40 rounded-xl" src="../../../../../assets/profile.jpg"/>
+    <div class="flex flex-col w-full gap-y-1">
+        <!--Header-->
+        <div class="flex flex-row justify-between items-center">
+            <p class="text-3xl font-semibold">{{user.firstname}} {{user.lastname}}</p>
+            <button class="w-9 h-9 rounded hover:bg-gray-200">
+                <span><i class="text-xl bi bi-pencil-square"></i></span>
+            </button>
+        </div>
+        @if(user.description)
+        {
+            <div class="text-lg font-light">{{user.description}}</div>
+        }
+
+        <!--Bagets-->
+        <div class="flex flex-row flex-wrap my-4 gap-y-1 gap-x-5 *:justify-between lg:justify-between md:justify-center sm:justify-start text-gray-500">
+            @if(user.email)
+            {
+                <div class="flex flex-row gap-x-3">
+                    <div class=""><i class="bi bi-envelope"></i></div>
+                    <div class="font-normal">{{user.email}}</div>
+                </div>
+            }
+            @if(user.phoneNumber)
+            {
+                <div class="flex flex-row gap-x-3">
+                    <div class=""><i class="bi bi-telephone"></i></div>
+                    <div class="font-normal">{{user.phoneNumber}}</div>
+                </div>
+            }
+
+            @if(user.discordId)
+            {
+                <div class="flex flex-row gap-x-3">
+                    <div class=""><i class="bi bi-discord"></i></div>
+                    <div class="font-normal">{{user.discordId}}</div>
+                </div>
+            }
+        </div>
+    </div>
+    
+
+</div>

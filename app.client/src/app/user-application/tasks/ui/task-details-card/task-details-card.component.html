@@ -1,0 +1,80 @@
+@if(task)
+{
+    <form [formGroup]="form" class="fadeInRight bg-white flex flex-col min-w-96 h-full justify-start px-6 py-5 gap-y-3">
+        <!--Options-->
+        <div class="flex flex-row justify-between gap-x-2">
+            <div class="">
+                <!--<button class="w-6 h-7 rounded hover:bg-gray-200">
+                    <span><i class="text-lg bi bi-star"></i></span>
+                </button>-->
+            </div>
+            <div class="flex gap-x-2">
+            <button class="w-6 h-7 bg-red-50 text-red-600 rounded hover:bg-gray-200" (click)="delateTask(task.id)">
+                <span><i class="text-lg bi bi-trash3"></i></span>
+            </button>
+            <!--<button class="w-6 h-7 rounded hover:bg-gray-200" (click)="archive.emit(task.id)">
+                <span><i class="text-lg bi bi-archive"></i></span>
+            </button>-->
+            <!--<button class="w-6 h-7 rounded hover:bg-gray-200">
+                <span><i class="text-lg bi bi-three-dots"></i></span>
+            </button>-->
+            <button class="w-6 h-7 rounded hover:bg-gray-200" [routerLink]="['../']">
+                <span><i class="text-lg bi bi-x-lg"></i></span>
+            </button>
+        </div>
+        </div>
+        <!--Title-->
+        <input class="px-2 py-1 text-lg rounded font-semibold hover:bg-gray-200" formControlName="title" />
+        <div class="flex flex-row justify-between gap-2">
+            <select class="p-1 border-0 rounded-md bg-blue-500 border-black font-medium text-white" formControlName="status">
+                <option [value]="TaskStatus.NEW">New</option>
+                <option [value]="TaskStatus.IN_PROGRESS">In Progress</option>
+                <option [value]="TaskStatus.DONE">Done</option>
+            </select>
+            @if(form.dirty)
+            {
+            <div class="flex flex-row gap-1">
+                <button class="hover:bg-gray-200 rounded px-1 font-bold border-2" (click)="updateTask()"><i class="bi bi-check-lg"></i></button>
+                <button class="hover:bg-gray-200 rounded px-1 font-bold border-2" (click)="resetForm()"><i class="bi bi-x-lg"></i></button>
+            </div>
+            
+            }
+        </div>
+        <div class="flex flex-col gap-y-1">
+            <div class="font-medium text-base">Description</div>
+            <input class="text-sm px-2 rounded hover:bg-gray-200" formControlName="description" placeholder="Here you can add description"/>
+        </div>
+        <!--Details card-->
+        <div class="flex flex-col gap-y-4 border-2 rounded p-2 text-nowrap">
+            <!--Header-->
+            <div class="font-semibold">Details</div>
+            <div class="flex flex-col gap-y-3 px-2">
+                <div class="flex flex-row justify-between items-center gap-x-2">
+                    <div class="font-light text-sm">Priority</div>
+                    <select class="p-1 border-0 rounded-md font-medium text-black" formControlName="priority">
+                        <option class="" [value]="TaskPriority.NONE">-</option>
+                        <option class="" [value]="TaskPriority.LOW">LOW</option>
+                        <option class="" [value]="TaskPriority.MEDIUM">MEDIUM</option>
+                        <option class="" [value]="TaskPriority.HIGH">HIGH</option>
+                    </select>
+                </div>
+                <div class="flex flex-row justify-between items-center gap-x-5">
+                    <div class="font-light text-sm">Deadline</div>
+                    <input type="datetime-local" class="text-black w-min" formControlName="deadline"/>
+                </div>
+                <!--<div class="flex flex-row justify-between items-center gap-x-5">
+                    <div class="font-light text-sm">Created by</div>
+                    <div class="flex flex-row gap-x-1 justify-center items-center hover:bg-gray-200 p-1 rounded">
+                        <img class="w-5 h-5 rounded-full" src="../../../../../assets/profile.jpg"/>
+                       <span class="text-sm font-medium">Damian Łączyński</span> 
+                    </div>
+                </div>-->
+            </div>
+        </div>
+        <div class="flex flex-col gap-y-0.5">
+            <div class="text-sm">Created at {{task.createdAt | date:'medium'}}</div>
+            <div class="text-sm">Updated at {{task.updatedAt | date:'medium'}}</div>
+        </div>
+    </form>
+}
+

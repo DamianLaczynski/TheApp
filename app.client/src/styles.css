@@ -2,3 +2,70 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+*:hover {
+  cursor: default;
+}
+
+a:hover, button:hover {
+  cursor: pointer;
+}
+button:hover * {
+  cursor: pointer;
+}
+body {
+  margin: 0px;
+  padding: 0px;
+
+  color: var(--foreground);
+  background-color: var(--background);
+
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  width: 4px;
+  height: 4px;
+  background: #dbdbdb; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  width: 4px;
+  background: #000000; 
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #696969; 
+}
+
+.faceInCenter
+  {
+    animation: myAnim 1s ease 0s 1 normal forwards;
+
+  }
+  @keyframes myAnim {
+    0% {
+      opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }

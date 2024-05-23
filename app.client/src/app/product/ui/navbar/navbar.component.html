@@ -1,0 +1,30 @@
+<header class="bg-white shadow-md">
+    <div class="container mx-auto py-4 px-8 flex flex-row justify-between items-center">
+        <div class="inline-flex items-center gap-x-4">
+            <img class="h-12 w-12 mx-4" src="../../../assets/logo-sm.svg"/>
+            <button [routerLink]="['/product/landing']" [routerLinkActive]="['font-semibold']"
+                class="text-black hover:bg-slate-200 hover:font-semibold font-medium py-2 px-4 rounded inline-block">Home</button>
+                <button [routerLink]="['/product/features']" [routerLinkActive]="['font-semibold']"
+                class="text-black hover:bg-slate-200 hover:font-semibold font-medium py-2 px-4 rounded inline-block">Features</button>
+                <button [routerLink]="['/product/docs']" [routerLinkActive]="['font-semibold']"
+                class="text-black hover:bg-slate-200 hover:font-semibold font-medium py-2 px-4 rounded inline-block">Docs</button>
+        </div>
+        <div class="flex flex-row gap-x-2">
+            @if(authState.state == authStateValue.LOGGED_IN)
+            {
+                <button [routerLink]="['/app/dashboard']"
+                class="text-black border-black border-solid border-2 hover:bg-black hover:text-white  font-semibold py-2 px-4 rounded inline-block">Go to The App</button>
+            }
+            @else {
+                <button [routerLink]="['/app/auth/login']"
+                class="text-black hover:border-black hover:border-solid hover:border-2 font-semibold py-2 px-4 rounded inline-block">Log
+                In</button>
+            <button [routerLink]="['/app/auth/register']"
+                class="text-black border-black border-solid border-2 hover:bg-black hover:text-white  font-semibold py-2 px-4 rounded inline-block">Sign
+                Up</button>
+            }
+            
+        </div>
+    </div>
+
+</header>
