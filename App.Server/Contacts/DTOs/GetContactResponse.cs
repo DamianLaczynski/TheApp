@@ -1,10 +1,14 @@
 ﻿using App.Server.Contacts.Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace App.Server.Contacts.DTOs
 {
-    public class UpdateContactRequest : IContact
+    public class GetContactResponse : IContact
     {
+        /// <summary>
+        /// Gets or sets the unique identifier for the contact.
+        /// </summary>
+        public string Id { get; set; }
+
         /// <summary>
         /// Gets or sets the first name of the contact.
         /// </summary>
@@ -23,7 +27,6 @@ namespace App.Server.Contacts.DTOs
         /// <summary>
         /// Gets or sets the phone number of the contact.
         /// </summary>
-        [RegularExpression("[0-9]{9}", ErrorMessage = "Phone must be numeric and have 9 digits")]
         public string? PhoneNumber { get; set; }
 
         /// <summary>
@@ -32,8 +35,8 @@ namespace App.Server.Contacts.DTOs
         public DateOnly? Birthday { get; set; }
 
         /// <summary>
-        /// Gets or sets the identifier of the category for the contact.
+        /// Gets or sets the category of the contact.
         /// </summary>
-        public string? CategoryId { get; set; }
+        public GetContactCategoryResponse? Category { get; set; }
     }
 }

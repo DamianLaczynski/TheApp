@@ -3,39 +3,40 @@ using App.Server.Contacts.Services;
 using App.Server.Service;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NLog.Web;
 using StudyBookAPI.Entities;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// NLog configuration
 builder.Host.UseNLog();
 
-//Database
+// Database context configuration
 builder.Services.AddDbContext<AppDbContext>();
 
-//AutoMapper
+// AutoMapper configuration
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-//FluentValidation
+// FluentValidation configuration
 builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 
-//Services
+// Service registrations
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<IPlannerEventService, PlannerEventService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IContactCategoryService, ContactCategoryService>();
 
-//Authentication and Authorization
-builder.Services.AddAuthorizationBuilder();
+// Authentication and authorization configuration
+builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<User>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddApiEndpoints();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
-    // Password settings.
+    // Password settings
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
     options.Password.RequireNonAlphanumeric = true;
@@ -43,26 +44,25 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 6;
     options.Password.RequiredUniqueChars = 1;
 
-    // Lockout settings.
+    // Lockout settings
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.Lockout.AllowedForNewUsers = true;
 
-    // User settings.
+    // User settings
     options.User.AllowedUserNameCharacters =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
     options.User.RequireUniqueEmail = true;
 
-    // Default SignIn settings.
+    // SignIn settings
     options.SignIn.RequireConfirmedEmail = false;
     options.SignIn.RequireConfirmedPhoneNumber = false;
 });
 
-//Exception handling
+// Exception handling configuration
 builder.Services.AddExceptionHandler<AppExceptionHandler>();
 
-//Swagger
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Swagger configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -90,33 +90,34 @@ builder.Services.AddSwaggerGen(options =>
                     Id = "Bearer"
                 }
             },
-            new string[] {}
+            new string[] { }
         }
     });
 });
 
-//CORS
+// CORS configuration
 builder.Services.AddCors(setup =>
 {
     setup.AddPolicy("default", policy =>
     {
         policy.AllowAnyHeader()
-            .AllowAnyOrigin()
-            .AllowAnyMethod();
+              .AllowAnyOrigin()
+              .AllowAnyMethod();
     });
 });
 
+// Add controllers
 builder.Services.AddControllers();
 
 var app = builder.Build();
 
-//Identity
+// Identity API endpoint mapping
 app.MapIdentityApi<User>();
 
-//Exception handling
+// Exception handling middleware
 app.UseExceptionHandler(_ => { });
 
-// Configure the HTTP request pipeline.
+// HTTP request pipeline configuration
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -130,19 +131,10 @@ app.UseHttpsRedirection();
 
 app.UseCors("default");
 
+app.UseAuthorization();
+
 app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
 
-app.UseAuthorization();
-
 app.Run();
-
-
-
-
-
-
-
-
-
