@@ -5,6 +5,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { ToastService } from '../../../toast/service/toast.service';
 import { ContactApiService } from './contact-api.service';
 import { ContactStateService } from './contact-state.service';
+import { CreateContactPayload, UpdateContactPayload } from '../../model/contact';
 
 @Injectable({
   providedIn: 'root'
@@ -50,20 +51,22 @@ export class ContactService {
       .subscribe();
   }
 
-  create(payload: any) {
+  create(payload: CreateContactPayload) {
     return this.httpService
       .create(payload)
       .pipe(
         tap((response) => {
           if (response) {
             this.state.addContact(response);
+            this.toast.setSuccess("Created successfully");
+            this.toast.show(3000);
           }
         })
       )
       .subscribe();
   }
 
-  update(id: string, payload: any) {
+  update(id: string, payload: UpdateContactPayload) {
     return this.httpService.update(id, payload).pipe(
       tap((response) => {
         this.state.updateContact(response);

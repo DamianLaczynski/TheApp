@@ -1,82 +1,67 @@
-<!-- <div class="flex flex-row justify-between items-center gap-x-5">
-    <div class="font-light text-sm">Category</div>
-    <input class="px-2 rounded hover:bg-gray-200" placeholder="eg. 123 456 789" formControlName="phoneNumber"/>
 @if(state$ | async; as state)
 {
-    @switch (state.state) {
-        @case ("SUCCESS") {
-            <div class="flex flex-col">
-            <select>
-                @for (cat of state.results; track $index) {
-                    <option [value]="cat.id">{{cat.name}}</option>
-                }
-            </select>
-            @for (cat of state.results; track $index) {
-                <select>
-                    @for (sub of cat.subCategories; track sub.id) {
-                        <option [value]="sub.id">{{sub.name}}</option>
-                    }
-                </select>
-                
-            }
-        </div>
-        }
-    }
-}
-</div> -->
-
-
-    @if(state$ | async; as state)
-{
-    @switch (state.state) {
-        @case ("SUCCESS") {
-            @if(category)
+    @switch (state.state) 
+    {
+        @case ("SUCCESS") 
+        {
+            @if(categoryForm)
             {
-                @if(category.superCategory)
-                {
+                <form [formGroup]="categoryForm" class="flex flex-col gap-2">
                     <div class="flex flex-row justify-between items-center gap-x-5">
                         <div class="font-light text-sm">Category</div>
-                        <select [value]="category.superCategory.id">
-                            @for (cat of state.results; track $index) {
-                                <option [value]="cat.id">{{cat.name}}</option>
+                        <select formControlName="supercategory" class="w-32" (change)="updateForm('category')">
+                            <option [value]="''">-</option>
+                            @for (category of state.results; track $index) 
+                            {
+                                <option [value]="category.id">{{category.name}}</option>
                             }
                         </select>
                     </div>
-                    <div class="flex flex-row justify-between items-center gap-x-5">
-                        <div class="font-light text-sm">SubCategory</div>
-                            @if(state.results | find: category.superCategory.id; as sub)
-                            {
-                                <select [value]="category.id">
-                                    @for (cat of sub.subCategories; track $index) {
-                                        <option [value]="cat.id">{{cat.name}}</option>
+                
+                    @if(state.results | find: categoryForm.controls.supercategory.value; as sub)
+                    {
+                        @if(sub.subCategories.length > 0)
+                        {
+                            <div class="flex flex-row justify-between items-center gap-x-5">
+                                <div class="font-light text-sm">SubCategory</div>
+                                <select formControlName="category" class="w-32" (change)="updateForm('subcategory')">
+                                    <option [value]="''">-</option>
+                                    @for (subcategory of sub.subCategories; track $index) 
+                                    {
+                                        <option [value]="subcategory.id">{{subcategory.name}}</option>
                                     }
                                 </select>
+                            </div>
+                        }
+                        @if(sub.name == "Inny" && categoryForm.controls.category.value == '')
+                        {
+                            <div class="flex flex-row justify-between items-center gap-1">
+                                <div class="border-2 w-full h-0"></div>
+                                <div class="capitalize text-sm">add own other subcategory</div>
+                                <div class="border-2 w-full h-0"></div>
+                            </div>
+                            <div class="flex flex-row justify-between items-center gap-x-2">
+                                <div class="font-light text-sm text-wrap">Own subcategory</div>
+                                <input #subName class="px-2 rounded hover:bg-gray-200 min-w-28" placeholder="Type here ..."/>
+                            </div>
+                            @if(subName.value)
+                            {
+                                <div class="flex flex-row justify-between gap-2">
+                                    <div class="flex flex-row gap-1">
+                                        <button class="hover:bg-gray-200 rounded px-1 font-bold border-2 bi bi-check-lg" (click)="addSubcategoryToOtherCategory(subName.value)"></button>
+                                    </div>
+                                </div>
                             }
-                        
-                        
-                    </div>
-                }
-                @else {
-                    <div class="flex flex-row justify-between items-center gap-x-5">
-                        <div class="font-light text-sm">Category</div>
-                        {{category.id}}
-                        <select [value]="category.id">
-                            @for (cat of state.results; track $index) {
-                                {{cat.id}}
-                                <option [value]="cat.id">{{cat.id}}</option>
-                            }
-                        </select>
-                    </div>
-                }
+                            
+                            
+                        }
+                    }
+                </form>
             }
-            
-            
-            
-            
-    <!-- <select [value]="category.superCategory?.id">
-        <option ></option>
-    </select> -->
-
+        }
+        @case ("ERROR") {
+            <div class="">Error whiel fetching categories</div>
+        }
+        @case ("IDLE") {}
     }
-}
 }

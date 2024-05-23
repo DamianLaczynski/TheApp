@@ -4,6 +4,7 @@ import { createListState } from '../../../utils/create-list-state';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { CategoryApiService } from './category-api.service';
 import { CategoryStateService } from './category-state.service';
+import { CreateOtherSubcategory } from '../../model/category';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class CategoryService {
   listState$ = createListState(
     this.state.value$,
     this.loadingState$,
-    (state) => state.contacts
+    (state) => state.categories
   );
 
   getAll() {
@@ -26,7 +27,7 @@ export class CategoryService {
       .pipe(
         tap((response) => {
           if (response.body) {
-            this.state.setContacts(response.body);
+            this.state.setCategorys(response.body);
             console.log(response)
           }
         })
@@ -40,20 +41,20 @@ export class CategoryService {
       .pipe(
         tap((response) => {
           if (response.body) {
-            this.state.addContact(response.body);
+            this.state.addCategory(response.body);
           }
         })
       )
       .subscribe();
   }
 
-  create(payload: any) {
+  createOtherSubcategory(payload: CreateOtherSubcategory) {
     return this.httpService
       .create(payload)
       .pipe(
         tap((response) => {
           if (response) {
-            this.state.addContact(response);
+            this.state.addCategory(response);
           }
         })
       )
@@ -63,7 +64,7 @@ export class CategoryService {
   update(id: string, payload: any) {
     return this.httpService.update(id, payload).pipe(
       tap((response) => {
-        this.state.updateContact(response);
+        this.state.updateCategory(response);
       })
     ).subscribe();
   }
@@ -71,7 +72,7 @@ export class CategoryService {
   delete(id: string) {
     return this.httpService.delete(id).pipe(
       tap(() => {
-        this.state.removeContact(id);
+        this.state.removeCategory(id);
       })
     ).subscribe();
   }

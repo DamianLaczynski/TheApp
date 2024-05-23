@@ -1,10 +1,67 @@
-<div class="flex flex-row justify-between min-h-full bg-gray-50">
-  @if(state$ | async; as state) { @switch (state.state) { @case ("SUCCESS") {
-  <div class="flex flex-col gap-2 w-full">
-    <app-header></app-header>
-    <app-contacts-list [contacts]="state.results"></app-contacts-list>
-  </div>
-  @if(contactId) {
-  <app-contact-details-side-card [contact]="state.results | find: contactId"></app-contact-details-side-card>
-  } } } }
-</div>
+@if(state$ | async; as state) 
+{
+  @switch (state.state) 
+  {
+    @case ("SUCCESS") 
+    {
+      
+      @if(authState$ | async; as authState)
+      {
+        @if(authState.state == "LOGGED_IN")
+        {
+          <div class="flex flex-row justify-between min-h-full bg-gray-50">
+            <div class="flex flex-col gap-2 w-full">
+              <app-header (showEmptyContactForm)="toggleEmptyContactForm()"></app-header>
+              <app-contacts-list [contacts]="state.results"></app-contacts-list>
+            </div>
+          @if(contactId) 
+          {
+            @if(state.results | find: contactId; as contact)
+            {
+            <app-contact-details-side-card [contact]="contact" (update)="updateContact($event)" (delate)="delateContact($event)" (close)="closeForm()"></app-contact-details-side-card>
+            }
+          }
+          @else {
+            @if(isEmptyContactFormShowed)
+            {
+              <app-contact-details-side-card (create)="createContact($event)" (close)="closeForm()"></app-contact-details-side-card>
+            }
+          } 
+        </div>
+        }
+        @else {
+          <div class="flex flex-row justify-center h-full max-w-6xl bg-white">
+            <div class="flex flex-col gap-2">
+              <div class="flex flex-row justify-between items-center gap-5">
+                <div class="text-4xl font-semibold">Public Preview Of Contacts</div>
+                <button class="rounded border-2 border-black px-2 py-1 font-medium hover:bg-gray-200" [routerLink]="['/app/auth/login']">Go to Login Page</button>
+              </div>
+              
+              <app-contacts-list [contacts]="state.results"></app-contacts-list>
+            </div>
+          </div>
+        }
+      }
+      
+
+    } 
+    @case ("LOADING") 
+    {
+      <div class="fadeIn flex justify-center items-center h-full">
+          <div class="flex flex-row gap-2">
+              <div class="w-4 h-4 rounded-full bg-gray-700 animate-bounce [animation-delay:.7s]"></div>
+              <div class="w-4 h-4 rounded-full bg-gray-600 animate-bounce [animation-delay:.3s]"></div>
+              <div class="w-4 h-4 rounded-full bg-gray-700 animate-bounce [animation-delay:.7s]"></div>
+            </div>
+      </div>
+    }
+    @case ("ERROR") 
+    {
+      <div class="flex flex-col justify-center items-center h-full">
+          <p class="font-light text-4xl">Something went wrong ...</p>
+          <p class="font-light text-lg">{{state.error.message}}</p>
+
+      </div>
+    }
+  }  
+}

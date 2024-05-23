@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Category, CategorySetItem } from '../../model/category';
 import { BehaviorSubject } from 'rxjs';
 
-export type ContactState = {
-  contacts: CategorySetItem[] 
+export type CategoryState = {
+  categories: CategorySetItem[] 
 }
 
 const initialState = {
-  contacts: [],
+  categories: [],
 }
 
 @Injectable({
@@ -15,47 +15,55 @@ const initialState = {
 })
 export class CategoryStateService {
 
-  private state$ = new BehaviorSubject<ContactState>(initialState);
+  private state$ = new BehaviorSubject<CategoryState>(initialState);
 
   value$ = this.state$.asObservable();
 
-  addContact(contact: CategorySetItem)
+  addCategory(category: Category)
   {
+    if(category.superCategory)
+      {
+        this.state$.value.categories.find(item => item.id == category.superCategory?.id)?.subCategories.push(category);
+      }
+      else {
+        this.state$.value.categories.push({id: category.id, name: category.name, subCategories: []})
+      }
+    
     this.state$.next({
       ...this.state$.value,
-      contacts: [...this.state$.value.contacts, contact]
+      categories: this.state$.value.categories
     });
   }
 
-  setContacts(contacts: CategorySetItem[])
+  setCategorys(categories: CategorySetItem[])
   {
     this.state$.next({
       ...this.state$.value,
-      contacts: contacts
+      categories: categories
     });
   }
 
-  removeContact(id: string)
+  removeCategory(id: string)
   {
-    const updatedContact = this.state$.value.contacts.filter((contact) => {
-      return contact?.id !== id;
+    const updatedCategories = this.state$.value.categories.filter((category) => {
+      return category?.id !== id;
     });
 
     this.state$.next({
       ...this.state$.value,
-      contacts: updatedContact
+      categories: updatedCategories
     });
   }
 
-  updateContact(updatedContact: CategorySetItem)
+  updateCategory(updatedCategory: CategorySetItem)
   {
-    const updatedContacts = this.state$.value.contacts.map((contact) => {
-      return contact.id === updatedContact.id ? updatedContact : contact;
+    const updatedCategories = this.state$.value.categories.map((category) => {
+      return category.id === updatedCategory.id ? updatedCategory : category;
     });
 
     this.state$.next({
       ...this.state$.value,
-      contacts: updatedContacts
+      categories: updatedCategories
     });
   }
 }

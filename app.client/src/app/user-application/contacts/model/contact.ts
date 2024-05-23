@@ -11,3 +11,21 @@ export interface Contact {
     updatedAt?: Date
     category?: Category
 }
+
+export interface CreateContactPayload {
+    firstname: string,
+    lastname: string,
+    email: string,
+    phoneNumber?: string,
+    birthday: Date | null,
+    categoryId?: string
+}
+
+export interface UpdateContactPayload {
+    firstname?: string,
+    lastname?: string,
+    email?: string,
+    phoneNumber?: string,
+    birthday: Date | null,
+    categoryId?: string
+}

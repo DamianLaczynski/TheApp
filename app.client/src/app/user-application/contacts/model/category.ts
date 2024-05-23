@@ -1,3 +1,5 @@
+import { FormControl, FormGroup } from "@angular/forms";
+
 export interface Category {
     id: string,
     name: string,
@@ -10,3 +12,14 @@ export interface CategorySetItem {
     subCategories: Category[]
 }
 
+export type CategoryForm = FormGroup<{
+    supercategory: FormControl<string>;
+    category: FormControl<string>;
+  }>;
+  
+  export type CategoryFormValue = ReturnType<CategoryForm['getRawValue']>;
+
+export interface CreateOtherSubcategory {
+    name: string;
+    superCategoryId: string;
+}
