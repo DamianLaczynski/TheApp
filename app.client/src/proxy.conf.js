@@ -9,8 +9,8 @@ const PROXY_CONFIG = [
       "/api/Contact",
       "/api/ContactPublic"
     ],
-    target: "https://localhost:7291",
-    secure: false, 
+    target: "http://localhost:5096",
+    secure: true, 
   }
 ]
 
