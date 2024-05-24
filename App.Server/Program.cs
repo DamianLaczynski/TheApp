@@ -27,6 +27,7 @@ builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<IPlannerEventService, PlannerEventService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IContactCategoryService, ContactCategoryService>();
+builder.Services.AddScoped<ContactCatetoriesSeeder>();
 
 // Authentication and authorization configuration
 builder.Services.AddAuthorization();
@@ -116,6 +117,11 @@ app.MapIdentityApi<User>();
 
 // Exception handling middleware
 app.UseExceptionHandler(_ => { });
+
+var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<ContactCatetoriesSeeder>();
+
+seeder.Seed();
 
 // HTTP request pipeline configuration
 if (app.Environment.IsDevelopment())
