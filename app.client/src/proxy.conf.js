@@ -3,10 +3,14 @@ const PROXY_CONFIG = [
     context: [
       "/login",
       "/register",
-      "/api/Task"
+      "/refresh",
+      "/api/Task",
+      "/api/PlannerEvent",
+      "/api/Contact",
+      "/api/ContactPublic"
     ],
-    target: "https://localhost:7291",
-    secure: false, 
+    target: "http://localhost:5096",
+    secure: true, 
   }
 ]
 

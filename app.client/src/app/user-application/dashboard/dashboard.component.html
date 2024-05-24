@@ -1,18 +1,27 @@
-<div class="flex flex-row m-5">
-  <div class="card w-80 p-2 bg-gray-50 rounded-md">
-    <div class="flex justify-between px-1 items-center">
-      <div class="font-medium text-lg">Favourites</div>
-      <div class="font-medium text-lg  hover:-translate-y-1 hover:transition hover:duration-150 transition duration-100"><i class="bi bi-pin-fill"></i></div>
+<!-- How to center div -->
+<div class="flex flex-col justify-center items-center min-h-full gap-5 py-5"> 
+<div class="text-5xl font-bold">Welcome User</div>
+<div class="flex flex-col lg:flex-row gap-5 max-w-4xl overflow-visible">
 
+    <div class="flex flex-col p-5 lg:py-20 gap-2 w-80">
+        <div class="text-2xl">Tasks</div>
+        <div class="text-wrap  text-justify">Effortlessly organize your tasks with features designed for simplicity and efficiency. Set deadlines and change statuses to ensure timely completion and maintain productivity.</div>
+        <div class="">
+        <button class=" rounded p-2 inline-flex justify-center gap-2 font-bold"  [routerLink]="['/app/tasks']">Tasks<span class="font-bold bi bi-arrow-right"></span></button>
     </div>
-    <div class="flex p-2 flex-col justify-center gap-y-2">
-        @for (resource of resources; track $index) {
-            <app-favourits-card [resource]="resource"></app-favourits-card>
-        }
     </div>
-
-    
-  </div>
+    <div class="flex flex-col p-5 gap-2 items-center w-96">
+        <div class="text-3xl font-semibold">Contacts</div>
+        <div class="text-wrap text-lg text-justify">Easily add new contacts and update existing ones to keep information current. Categorize your contacts for streamlined organization, and store important details such as phone numbers and birthdays.</div>
+        <button class="bg-yellow-500 rounded p-2 m-2 inline-flex justify-center gap-2 font-bold" [routerLink]="['/app/contacts']">Go to Contacts<span class="font-bold bi bi-arrow-right"></span></button>
+    </div>
+    <div class="flex flex-col p-5 lg:py-20 gap-2 w-80">
+        <div class="text-2xl">Day Planner</div>
+        <div class="text-wrap  text-justify">Easily add and update planner events to keep your schedule current. Set specific time ranges or durations for each event to ensure efficient time management.</div>
+        <div class="">
+        <button class=" rounded p-2 inline-flex justify-center gap-2 font-bold"  [routerLink]="['/app/schedule']">Planner<span class="font-bold bi bi-arrow-right"></span></button>
+    </div>
+    </div>
 
 </div>
-
+</div>

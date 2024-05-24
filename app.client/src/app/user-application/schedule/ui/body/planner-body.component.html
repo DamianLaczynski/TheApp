@@ -1,0 +1,15 @@
+<div class="fadeRight flex flex-col p-3 gap-y-1 bg-white rounded-lg mx-6">
+    <div class="flex flex-row gap-1 border-b-2">
+        <div class="flex flex-row justify-center p-2 gap-1 min-w-28 max-w-28">
+                <i class="bi bi-clock"></i>
+        </div>
+        <div class="flex flex-row justify-between items-center p-2 gap-2 border-l-2 w-full">
+            <div class="font-medium text-lg px-1 tracking-wide">TITLE</div>
+            <!-- <button class="hover:bg-gray-200 rounded px-1 bi bi-plus-square"></button> -->
+        </div>
+    </div>
+    
+    @for (item of dayPlanner; track $index) {
+        <app-schedule-event-call [plannerEvent]="item" [currentDate]="currentDate"></app-schedule-event-call>
+    }
+</div>

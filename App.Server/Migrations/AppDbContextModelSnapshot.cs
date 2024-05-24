@@ -21,6 +21,106 @@ namespace App.Server.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("App.Server.Contacts.Models.Contact", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text");
+
+                    b.Property<DateOnly?>("Birthday")
+                        .HasColumnType("date");
+
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Firstname")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
+
+                    b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Contacts");
+                });
+
+            modelBuilder.Entity("App.Server.Contacts.Models.ContactCategory", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SuperCategoryId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SuperCategoryId");
+
+                    b.ToTable("ContactCategories");
+                });
+
+            modelBuilder.Entity("App.Server.Model.PlannerEvent", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<int?>("Duration")
+                        .HasColumnType("integer");
+
+                    b.Property<TimeOnly?>("End")
+                        .HasColumnType("time without time zone");
+
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<short>("PlaceNumber")
+                        .HasColumnType("smallint");
+
+                    b.Property<TimeOnly?>("Start")
+                        .HasColumnType("time without time zone");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PlannerEvents");
+                });
+
             modelBuilder.Entity("App.Server.Chats.Model.ChatRoom", b =>
                 {
                     b.Property<string>("Id")
@@ -342,6 +442,26 @@ namespace App.Server.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("App.Server.Contacts.Models.Contact", b =>
+                {
+                    b.HasOne("App.Server.Contacts.Models.ContactCategory", "Category")
+                        .WithMany("Contacts")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("App.Server.Contacts.Models.ContactCategory", b =>
+                {
+                    b.HasOne("App.Server.Contacts.Models.ContactCategory", "SuperCategory")
+                        .WithMany("SubCategories")
+                        .HasForeignKey("SuperCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("SuperCategory");
+                });
+
             modelBuilder.Entity("App.Server.Chats.Model.Message", b =>
                 {
                     b.HasOne("App.Server.Chats.Model.ChatRoom", "ChatRoom")
@@ -429,6 +549,13 @@ namespace App.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("App.Server.Contacts.Models.ContactCategory", b =>
+                {
+                    b.Navigation("Contacts");
+
+                    b.Navigation("SubCategories");
                 });
 
             modelBuilder.Entity("App.Server.Chats.Model.ChatRoom", b =>

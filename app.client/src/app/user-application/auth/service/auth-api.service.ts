@@ -27,7 +27,7 @@ export class AuthApiService {
 
   refreshToken(refreshToken: string) {
     return this.http.post<Token>(
-      '/login',
+      '/refresh',
       { refreshToken },
       { observe: 'response' }
     );

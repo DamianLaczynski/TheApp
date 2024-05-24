@@ -1,19 +1,17 @@
 @if (isExpanded) {
 <div class="sidebar expanded z-20" id="sidebarExpanded">
   <button
-    class="w-min h-min flex justify-center items-center bg-black text-white text-center z-20 p-1 rounded-md border-gray-800"
-    style="font-size: 16px; line-height: 16px;" id="reduceButton" (click)="toggle()"><i
-      class="bi-chevron-left" style="width: 16px; height: 16px;"></i></button>
-
-      <a href="#" [routerLink]="['/product/landing']"><img class="w-11" src="../../../assets/logo-sm.svg"/></a>
+    class="w-min h-min flex justify-center items-center bg-black text-white text-center z-20 p-1 rounded-md border-gray-800 bi bi-chevron-left"
+    style="font-size: 16px; line-height: 16px;" id="reduceButton" (click)="toggle()"></button>
+      <a [routerLink]="['/product/landing']"><img class="w-11 hover:cursor-pointer" src="../../../assets/logo-sm.svg"/></a>
   <div class="divider"></div>
   <div class="navigation">
     <div class="title text-black">MAIN</div>
     <button class="btn text-black hover:bg-black hover:text-white" [routerLink]="['/app/dashboard']" [routerLinkActive]="['bg-black','text-white', 'font-medium']"><i class="bi bi-house"></i>
       <div class="label">Dashboard</div>
     </button>
-    <button class="btn text-black hover:bg-black hover:text-white" [routerLink]="['/app/audience']" [routerLinkActive]="['bg-black','text-white', 'font-medium']"><i class="bi bi-person"></i>
-      <div class="label">Audience</div>
+    <button class="btn text-black hover:bg-black hover:text-white" [routerLink]="['/app/contacts']" [routerLinkActive]="['bg-black','text-white', 'font-medium']"><i class="bi bi-person"></i>
+      <div class="label">Contacts</div>
     </button>
     <button class="btn text-black hover:bg-black hover:text-white" [routerLink]="['/app/materials']" [routerLinkActive]="['bg-black','text-white', 'font-medium']"><i class="bi bi-folder2"></i>
       <div class="label">Materials</div>
@@ -46,45 +44,37 @@
 @else {
 <div class="sidebar text-white z-20">
   <button
-    class="w-min h-min flex justify-center items-center bg-black text-white text-center z-20 p-1 rounded-md border-gray-800"
-    style="font-size: 16px; line-height: 16px; " id="expandButton" (click)="toggle()"><i
-      class="bi bi-chevron-right" style="width: 16px; height: 16px;"></i></button>
-      <a href="#" [routerLink]="['/product/landing']"><img class="w-11" src="../../../assets/logo-sm.svg"/></a>
+    class="w-min h-min flex justify-center items-center bg-black text-white text-center z-20 p-1 rounded-md border-gray-800 bi bi-chevron-right"
+    style="font-size: 16px; line-height: 16px; " id="expandButton" (click)="toggle()"></button>
+      <a href="#" [routerLink]="['/product/landing']"><img class="w-11 hover:cursor-pointer" src="../../../assets/logo-sm.svg"/></a>
   <div class="divider"></div>
   <div class="flex flex-col items-center justify-center gap-y-2">
     <div class="text-black tracking-tighter font-medium text-center" style="font-size: 10px; line-height: 12px;">MAIN
     </div>
     <button [routerLink]="['/app/dashboard']" [routerLinkActive]="['bg-black','text-white']"
-      class="sb-tooltip text-black flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black"><i
-        class="bi bi-house"></i><span class="tooltiptext">Dashboard</span></button>
-    <button [routerLink]="['/app/audience']" [routerLinkActive]="['bg-black','text-white']"
-      class="sb-tooltip text-black flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black"><i
-        class="bi bi-person"></i><span class="tooltiptext">Audience</span></button>
+      class="sb-tooltip text-black flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black bi bi-house"><span class="tooltiptext">Dashboard</span></button>
+    <button [routerLink]="['/app/contacts']" [routerLinkActive]="['bg-black','text-white']"
+      class="sb-tooltip text-black flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black bi bi-person"><span class="tooltiptext">Contacts</span></button>
     <button [routerLink]="['/app/materials']" [routerLinkActive]="['bg-black','text-white']"
-      class="sb-tooltip text-black flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black"><i
-        class="bi bi-folder2"></i><span class="tooltiptext">Materials</span></button>
+      class="sb-tooltip text-black flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black bi bi-folder2"><span class="tooltiptext">Materials</span></button>
     <button [routerLink]="['/app/schedule']" [routerLinkActive]="['bg-black','text-white']"
-      class="sb-tooltip text-black flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black"><i
-        class="bi bi-calendar-date"></i><span class="tooltiptext">Schedule</span></button>
+      class="sb-tooltip text-black flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black bi bi-calendar-date"><span class="tooltiptext">Schedule</span></button>
     <button [routerLink]="['/app/tasks']" [routerLinkActive]="['bg-black','text-white']"
-      class="sb-tooltip text-black flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black"><i
-        class="bi-list-task"></i><span class="tooltiptext">Tasks</span></button>
+      class="sb-tooltip text-black flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black bi-list-task"><span class="tooltiptext">Tasks</span></button>
   </div>
   <div class="divider"></div>
   <div class="flex flex-col items-center justify-center gap-y-2">
     <div class="text-black tracking-tighter font-medium text-center" style="font-size: 10px; line-height: 12px;">
       SETTINGS</div>
     <button [routerLink]="['/app/settings']" [routerLinkActive]="['bg-black','text-white']"
-      class="sb-tooltip text-black w-min flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black"><i
-        class="bi bi-gear"></i><span class="tooltiptext">Settings</span></button>
+      class="sb-tooltip text-black w-min flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black bi bi-gear"><span class="tooltiptext">Settings</span></button>
   </div>
   <div class="flex flex-col items-center justify-center gap-y-2">
     <button [routerLink]="['/app/info']" [routerLinkActive]="['bg-black','text-white']"
-      class="sb-tooltip text-black flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black"><i
-        class="bi bi-info-circle"></i><span class="tooltiptext">Info</span></button>
+      class="sb-tooltip text-black flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black bi bi-info-circle"><span class="tooltiptext">Info</span></button>
     <button
-      class="sb-tooltip text-black flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black warning"
-      (click)="logOut()"><i class="bi bi-box-arrow-right"></i><span class="tooltiptext">Logout Account</span></button>
+      class="sb-tooltip text-black flex px-3 py-2 gap-x-3 items-center text-sm leading-5 text-center rounded hover:text-white hover:bg-black warning bi bi-box-arrow-right"
+      (click)="logOut()"><span class="tooltiptext">Logout Account</span></button>
   </div>
 </div>
 }

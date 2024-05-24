@@ -1,0 +1,9 @@
+@switch (priority) { 
+    @case (TaskPriority.HIGH) {
+        <div class="font-normal text-xs rounded-xl px-3 py-1 capitalize text-red-600 bg-red-100">{{TaskPriority.HIGH}}</div>
+    } @case (TaskPriority.MEDIUM) {
+        <div class="font-normal text-xs rounded-xl px-3 py-1  text-yellow-500 bg-yellow-50">{{TaskPriority.MEDIUM}}</div>
+    } @case (TaskPriority.LOW) {
+        <div class="font-normal text-xs rounded-xl px-3 py-1 capitalize text-green-600 bg-green-100">{{TaskPriority.LOW}}</div>
+    } @default { } 
+}

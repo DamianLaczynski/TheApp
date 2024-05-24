@@ -1,0 +1,16 @@
+<div class="flex flex-row justify-between items-center gap-1 bg-gray-50 p-2 mx-6">
+    <div class="flex flex-row gap-2">
+        <button class="bg-white rounded px-2 py-1 font-medium invisible md:visible hover:bg-gray-200 border-2 border-black" (click)="today()">Today</button>
+    </div>
+    <div class="flex flex-row gap-4">
+        <button class="rounded bg-white px-2 py-1 border-2 hover:bg-gray-200 bi bi-chevron-left" (click)="previousDay()"></button>
+        <input #date type="date" class="rounded p-1 border-2 font-bold" [value]="currentDate | date:'yyyy-MM-dd'" (change)="newDateSelected.emit(date.valueAsDate!)" />
+        <button class="rounded bg-white px-2 py-1 border-2 hover:bg-gray-200 bi bi-chevron-right" (click)="nextDay()"></button>
+    </div>
+    <div class="flex flex-row gap-2">
+        <!-- <button class="bg-white rounded px-2 py-1 font-medium hover:bg-gray-200 border-2 border-black">Raport</button>
+        <button class="bg-white rounded px-2 py-1 font-medium hover:bg-gray-200 bi bi-pencil-square"></button>
+        <button class="bg-white rounded px-2 py-1 font-medium hover:bg-gray-200 bi bi-gear-fill"></button> -->
+        <!--<button class="bg-white rounded px-2 py-1 font-medium text-nowrap invisible lg:visible hover:bg-gray-200 border-2 border-black" (click)="showTaskExpoler.emit()">From Tasks</button>-->
+    </div>
+</div>

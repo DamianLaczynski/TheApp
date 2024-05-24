@@ -1,41 +1,31 @@
-import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HttpErrorResponse,
-} from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
-import { AuthService } from './service/auth.service';
+import { HttpErrorResponse, HttpInterceptorFn } from "@angular/common/http";
+import { AuthService } from "./service/auth.service";
+import { inject } from "@angular/core";
+import { catchError, throwError } from "rxjs";
 
-@Injectable()
-export class TokenInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+export const demoInterceptor: HttpInterceptorFn = (req, next) => {
+  let authService = inject(AuthService);
 
-  intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    if (this.authService.hasValidAccessToken()) {
-      const tokenType = this.authService.getTokenType();
-      const token = this.authService.getAccessToken();
+  let authReq = req.clone();
 
-      request = request.clone({
-        setHeaders: {
-          Authorization: `${tokenType} ${token}`,
-        },
-      });
-    }
-
-    return next.handle(request).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 401 && !request.url.includes('refreshToken')) {
-          // Wygaśniecie tokena - próba odświeżenia tokenu
-          this.authService.refreshToken();
-        }
-        return throwError(() => error);
-      })
-    );
+  if (authService.hasValidAccessToken()) {
+    const tokenType = authService.getTokenType();
+    const token = authService.getAccessToken();
+    authReq = req.clone({
+      setHeaders: {
+        Authorization: `${tokenType} ${token}`,
+      },
+    });
   }
-}
+
+  // Pass the cloned request with the updated header to the next handler
+  return next(authReq).pipe(
+    catchError((error: HttpErrorResponse) => {
+      if (error.status === 401 && !authReq.url.includes('refreshToken')) {
+        // Wygaśniecie tokena - próba odświeżenia tokenu
+        authService.refreshToken();
+      }
+      return throwError(() => error);
+    })
+  );
+};

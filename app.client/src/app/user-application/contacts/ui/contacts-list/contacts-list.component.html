@@ -1,0 +1,6 @@
+<div class="flex flex-row flex-wrap justify-center gap-5 p-5">
+    @for (contact of contacts; track $index) {
+        <app-contact-card [contact]="contact"></app-contact-card>
+    }
+</div>
+

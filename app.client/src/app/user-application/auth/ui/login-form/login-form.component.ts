@@ -18,6 +18,7 @@ export class LoginFormComponent implements OnInit {
   
   loginForm!: FormGroup;
   ngOnInit() {
+    console.log("sdskhd");
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]

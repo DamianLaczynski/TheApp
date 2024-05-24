@@ -1,41 +1,12 @@
 import { Component } from '@angular/core';
-import { FavouritsCardComponent } from '../favourites/ui/favourits-card/favourits-card.component';
-import { Resource, ResourceType } from '../favourites/model/resource';
-import { NotificationsFeedComponent } from '../notifications/ui/notifications-feed/notifications-feed.component';
-import { MessagesFeedComponent } from '../messages/ui/message-feed/message-feed.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [FavouritsCardComponent, NotificationsFeedComponent, MessagesFeedComponent],
+  imports: [RouterLink],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
-  resources: Resource[] = [
-    {
-      id: '1',
-      name: 'Do your best',
-      type: ResourceType.TASK,
-      isFavourite: true,
-    },
-    {
-      id: '2',
-      name: 'Raport 2024',
-      type: ResourceType.MATERIAL,
-      isFavourite: true,
-    },
-    {
-      id: '2',
-      name: 'Schedule',
-      type: ResourceType.PATH,
-      isFavourite: true,
-    },
-    {
-      id: '2',
-      name: 'Meet Up Gdańsk',
-      type: ResourceType.EVENT,
-      isFavourite: true,
-    },
-  ];
 }
