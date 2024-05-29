@@ -15,6 +15,7 @@ import { ProfileComponent } from './user-application/user/profile/profile.compon
 import { ProfileSettingsComponent } from './user-application/user/ui/profile-settings/profile-settings.component';
 import { ScheduleComponent } from './user-application/schedule/schedule.component';
 import { ContactsComponent } from './user-application/contacts/contacts.component';
+import { ChatPageComponent } from './user-application/messages/chat.page.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/app/auth/login', pathMatch: 'full' },
@@ -39,7 +40,6 @@ export const routes: Routes = [
       { path: 'schedule', component: ScheduleComponent, title: "Schedule" },
       { path: 'tasks', component: KanbanBoardComponent, title: "Tasks" },
       { path: 'tasks/:taskId', component: KanbanBoardComponent, title: "Tasks" },
-      { path: 'settings', component: NotFoundComponent, title: "Settings" },
       { path: 'info', component: NotFoundComponent, title: "Info" },
       {
         path: 'profile',
@@ -49,8 +49,8 @@ export const routes: Routes = [
           { path: 'settings', component: ProfileSettingsComponent },
         ],
       },
-      { path: 'messages', component: NotFoundComponent },
-      { path: 'messages/:chatId', component: ChatComponent },
+      { path: 'messages', component: ChatPageComponent },
+      { path: 'messages/:chatId', component: ChatPageComponent },
       { path: 'notifications', component: NotFoundComponent },
     ],
   },

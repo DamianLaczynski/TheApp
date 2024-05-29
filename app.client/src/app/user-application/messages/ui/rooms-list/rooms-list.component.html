@@ -1,0 +1,17 @@
+<div class="flex flex-col bg-white h-full">
+    <!--Header-->
+    <div class="flex flex-row justify-between items-center p-2 px-3">
+        <div class="text-2xl font-semibold">Messages</div>
+        <button class="w-9 h-9 flex items-center justify-center rounded hover:bg-gray-200">
+            <i class="bi bi-pencil-square" style="font-size: 24px;"></i>
+        </button>
+    </div>
+    <div class="flex flex-row justify-between items-center p-3 ">
+        <input class="rounded-full border-2 border-black w-full px-2 py-1 " placeholder="Search..."/>
+    </div>
+    <div class="flex flex-col">
+        @for (room of rooms; track $index) {
+            <app-message-cell [notification]="room"></app-message-cell>
+        }
+    </div>
+</div>

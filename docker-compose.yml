@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  app.server:
+    image: ${DOCKER_REGISTRY-}appserver
+    build:
+      context: .
+      dockerfile: App.Server/Dockerfile

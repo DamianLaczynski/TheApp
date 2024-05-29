@@ -1,0 +1,36 @@
+# Ignore node_modules directory if using npm for frontend
+node_modules
+
+# Ignore Visual Studio temporary files
+.vs
+
+# Ignore NuGet package directories
+obj/
+bin/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.sln.docstates
+
+# Ignore PostgreSQL data directory if it's not part of the Docker build
+postgres_data/
+
+# Ignore any logs or temporary files
+logs/
+*.log
+
+# Ignore any local settings or secrets
+appsettings.json
+secrets.json
+
+# Ignore Docker specific files
+.dockerignore
+.docker/
+
+# Ignore any backup files
+*.bak
+
+# Ignore any files generated during build process
+*.exe
+*.dll
