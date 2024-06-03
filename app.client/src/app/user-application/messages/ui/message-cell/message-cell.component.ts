@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ChatNotification } from '../../../notifications/model/notification';
-import { RouterLink } from '@angular/router';
+import { OutletContext, RouterLink } from '@angular/router';
+import { PeerInfo } from '../../model/payload';
 
 
 @Component({
@@ -12,8 +13,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './message-cell.component.css'
 })
 export class MessageCellComponent {
- @Input({required: true}) notification!: ChatNotification;
-
+ @Input({required: true}) notification!: PeerInfo;
+  @Output()connect = new EventEmitter<string>();
 
  timeAgo(timestamp: Date) {
   const now = new Date().getTime();

@@ -2,16 +2,31 @@
     <!--Header-->
     <div class="flex flex-row justify-between items-center p-2 px-3">
         <div class="text-2xl font-semibold">Messages</div>
-        <button class="w-9 h-9 flex items-center justify-center rounded hover:bg-gray-200">
-            <i class="bi bi-pencil-square" style="font-size: 24px;"></i>
-        </button>
+        <button class="flex items-center justify-center rounded hover:bg-gray-200 text-lg text-nowrap mx-2 px-1" (click)="refreshList.emit()">Get List</button>
     </div>
-    <div class="flex flex-row justify-between items-center p-3 ">
+    @if(chatState$ | async; as chatState)
+    {
+        @if(chatState.state == 'OPENED')
+        {
+            <div class="flex flex-row justify-center text-lg font-medium">Login to see list of available peers</div>
+            <div class="flex flex-row justify-between items-center gap-5 p-3 ">
+                <div class="inline-flex gap-2">
+                    <input #nickname class="rounded border-2 border-black w-full px-2 py-1 " placeholder="Nickname..."/>
+                    <input #password class="rounded border-2 border-black w-full px-2 py-1 " placeholder="Password..."/>
+                </div>
+                
+                <button class="border-2 border-black font-medium px-2 p-1 rounded text-nowrap hover:bg-gray-200"
+                (click)="login.emit({nickname:nickname.value,password: password.value})">Log In</button>
+            </div>
+        }
+    }
+    
+    <!-- <div class="flex flex-row justify-between items-center gap-5 p-3 ">
         <input class="rounded-full border-2 border-black w-full px-2 py-1 " placeholder="Search..."/>
-    </div>
-    <div class="flex flex-col">
-        @for (room of rooms; track $index) {
-            <app-message-cell [notification]="room"></app-message-cell>
+    </div> -->
+    <div class="flex flex-col justify-center items-center">
+        @for (peer of peers; track $index) {
+            <app-message-cell (connect)="connect.emit($event)" [notification]="peer"></app-message-cell>
         }
     </div>
 </div>

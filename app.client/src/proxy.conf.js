@@ -1,7 +1,7 @@
 const PROXY_CONFIG = [
   {
     context: [
-      "/login",
+      "/wsapi",
       "/register",
       "/refresh",
       "/api/Task",
@@ -9,8 +9,8 @@ const PROXY_CONFIG = [
       "/api/Contact",
       "/api/ContactPublic"
     ],
-    target: "http://localhost:5096",
-    secure: true, 
+    target: "ws://localhost:8080",
+    secure: false, 
   }
 ]
 

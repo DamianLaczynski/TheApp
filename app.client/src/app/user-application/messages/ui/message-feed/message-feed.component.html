@@ -2,7 +2,7 @@
     <app-feed-header></app-feed-header>
     <div class="flex flex-col justify-start items-center gap-y-1 overflow-y-scroll" style="max-height: 50vh;">
         @for (notification of chatNotifications; track $index) {
-            <app-message-cell [notification]="notification"></app-message-cell>
+            <!-- <app-message-cell [notification]="notification"></app-message-cell> -->
             @if(!$last)
             {
                 <div class="rounded w-full bg-black" style="border-width: 0.5px;"></div>

@@ -9,7 +9,6 @@ import { LandingComponent } from './product/landing/landing.component';
 import { DocsComponent } from './product/docs/docs.component';
 import { FeaturesComponent } from './product/features/features.component';
 import { NotFoundComponent } from './user-application/not-found/not-found.component';
-import { ChatComponent } from './user-application/messages/ui/chat/chat.component';
 import { KanbanBoardComponent } from './user-application/tasks/ui/kanban-board/kanban-board.component';
 import { ProfileComponent } from './user-application/user/profile/profile.component';
 import { ProfileSettingsComponent } from './user-application/user/ui/profile-settings/profile-settings.component';
@@ -18,7 +17,7 @@ import { ContactsComponent } from './user-application/contacts/contacts.componen
 import { ChatPageComponent } from './user-application/messages/chat.page.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/app/auth/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/app/messages', pathMatch: 'full' },
   {
     path: 'app',
     component: UserAppComponent,
