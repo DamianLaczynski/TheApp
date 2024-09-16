@@ -7,11 +7,11 @@ const PROXY_CONFIG = [
       "/api/Task",
       "/api/PlannerEvent",
       "/api/Contact",
-      "/api/ContactPublic"
+      "/api/ContactPublic",
     ],
-    target: "http://localhost:5096",
-    secure: true, 
-  }
-]
+    target: "https://localhost:7291",
+    secure: false,
+  },
+];
 
 module.exports = PROXY_CONFIG;

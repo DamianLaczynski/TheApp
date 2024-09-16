@@ -6,6 +6,9 @@ import { DatePipe } from '@angular/common';
 import { demoInterceptor } from './user-application/auth/token.interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideHttpClient(withInterceptors([demoInterceptor])), DatePipe, provideRouter(routes, withComponentInputBinding())
-  ]
+  providers: [
+    provideHttpClient(withInterceptors([demoInterceptor])),
+    DatePipe,
+    provideRouter(routes, withComponentInputBinding()),
+  ],
 };

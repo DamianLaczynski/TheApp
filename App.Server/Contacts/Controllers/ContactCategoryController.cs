@@ -7,7 +7,6 @@ namespace App.Server.Contacts.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class ContactCategoryController : ControllerBase
     {
         private readonly IContactCategoryService _contactCategoryService;
@@ -48,6 +47,7 @@ namespace App.Server.Contacts.Controllers
         /// <param name="dto">The DTO.</param>
         /// <returns>Created subcategory as child.</returns>
         [HttpPost]
+        [Authorize]
         public async Task<GetContactCategoryResponse> CreateSubcategoryAsync([FromBody] CreateContactCategoryRequest dto)
         {
             return await _contactCategoryService.CreateSubcategoryAsync<GetContactCategoryResponse>(dto);
